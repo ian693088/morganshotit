@@ -1,0 +1,1 @@
+alter table public.media add column storage_path text;

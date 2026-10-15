@@ -87,6 +87,7 @@ export type Database = {
           featured: boolean
           id: string
           kind: string
+          storage_path: string | null
           title: string | null
           url: string
         }
@@ -96,6 +97,7 @@ export type Database = {
           featured?: boolean
           id?: string
           kind?: string
+          storage_path?: string | null
           title?: string | null
           url: string
         }
@@ -105,6 +107,7 @@ export type Database = {
           featured?: boolean
           id?: string
           kind?: string
+          storage_path?: string | null
           title?: string | null
           url?: string
         }

@@ -143,7 +143,7 @@ function MediaManager() {
               </Select>
               <div className="flex justify-between">
                 <Button size="sm" variant={m.featured ? "default" : "ghost"} onClick={() => update(m.id, { featured: !m.featured })}><Star /> {m.featured ? "Featured" : "Feature"}</Button>
-                <Button size="icon" variant="ghost" onClick={() => remove(m.id, m.storage_path)} aria-label="Delete"><Trash2 /></Button>
+                <Button size="icon" variant="ghost" onClick={() => remove(m.id, m.storage_path ?? null)} aria-label="Delete"><Trash2 /></Button>
               </div>
             </div>
           </div>
@@ -163,7 +163,7 @@ function HomeSettings() {
   const save = async (entries: Record<string, string>) => {
     const rows = Object.entries(entries).map(([key, value]) => ({ key, value, updated_at: new Date().toISOString() }));
     const { error } = await supabase.from("site_settings").upsert(rows);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success("Saved");
     qc.invalidateQueries({ queryKey: settingsQuery.queryKey });
   };
@@ -256,12 +256,12 @@ function Team() {
   const refresh = () => qc.invalidateQueries({ queryKey: ["admin", "team"] });
   const decide = async (id: string, approve: boolean) => {
     const { error } = await supabase.rpc("decide_admin_request", { _request_id: id, _approve: approve });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     refresh();
   };
   const toggle = async (uid: string, role: "admin" | "approver", grant: boolean) => {
     const { error } = await supabase.rpc("set_user_role", { _user_id: uid, _role: role, _grant: grant });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     refresh();
   };
   if (!data) return null;

@@ -47,7 +47,7 @@ function Account() {
 
   const askAdmin = async () => {
     const { error } = await supabase.from("admin_requests").insert({ user_id: user.id, reason: reason || null });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success("Request sent for approval");
     qc.invalidateQueries({ queryKey: ["mine", "request"] });
   };

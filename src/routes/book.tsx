@@ -10,10 +10,10 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
 import { PACKAGES, PAYBILL, ksh } from "@/lib/content";
 
-type Search = { pkg?: string };
+type Search = { pkg?: string | undefined };
 
 export const Route = createFileRoute("/book")({
-  validateSearch: (s: Record<string, unknown>): Search => ({ pkg: typeof s.pkg === "string" ? s.pkg : undefined }),
+  validateSearch: (s: Record<string, unknown>): Search => ({ pkg: typeof s["pkg"] === "string" ? s["pkg"] : undefined }),
   head: () => ({
     meta: [
       { title: "Book a Session — MorganShotIt Studio" },
@@ -46,7 +46,7 @@ function Book() {
       session_date: form.date, notes: form.notes || null, mpesa_code: form.code.trim().toUpperCase() || null,
     });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success("Booking received! We'll confirm once payment is verified.");
     navigate({ to: "/account" });
   };

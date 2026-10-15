@@ -67,17 +67,17 @@ export function useSettings() {
   const q = useQuery(settingsQuery);
   const s = q.data ?? {};
   return {
-    hero: s.hero_image || DEFAULT_HERO,
-    heroVideo: s.hero_video || "",
-    tagline: s.tagline || "Capture Your Story",
-    subline: s.subline || "Cinematic photography & film for the moments you'll want to relive forever.",
-    whatsapp: s.whatsapp || WHATSAPP,
+    hero: s["hero_image"] || DEFAULT_HERO,
+    heroVideo: s["hero_video"] || "",
+    tagline: s["tagline"] || "Capture Your Story",
+    subline: s["subline"] || "Cinematic photography & film for the moments you'll want to relive forever.",
+    whatsapp: s["whatsapp"] || WHATSAPP,
   };
 }
 
 export async function uploadToStorage(file: File | Blob, name: string) {
   const path = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}-${name.replace(/[^a-zA-Z0-9.]/g, "_")}`;
-  const { error } = await supabase.storage.from("media").upload(path, file, { contentType: file.type || undefined });
+  const { error } = await supabase.storage.from("media").upload(path, file, file.type ? { contentType: file.type } : {});
   if (error) throw error;
   const { data, error: e2 } = await supabase.storage.from("media").createSignedUrl(path, 60 * 60 * 24 * 365 * 20);
   if (e2 || !data) throw e2 ?? new Error("Could not create link");

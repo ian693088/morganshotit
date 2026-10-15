@@ -4,7 +4,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Badge } from "@/components/ui/badge";
+import { StatusBadge } from "@/components/StatusBadge";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
 import { ksh } from "@/lib/content";
@@ -20,11 +20,6 @@ export const Route = createFileRoute("/account")({
   }),
   component: Account,
 });
-
-export function StatusBadge({ s }: { s: string }) {
-  const v = s === "confirmed" || s === "approved" ? "default" : s === "rejected" || s === "cancelled" ? "destructive" : "secondary";
-  return <Badge variant={v} className="capitalize">{s}</Badge>;
-}
 
 function Account() {
   const { user, isAdmin, isApprover, loading } = useAuth();

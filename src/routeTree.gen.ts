@@ -16,6 +16,7 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as BookRouteImport } from './routes/book'
 import { Route as StockRouteImport } from './routes/stock'
+import { Route as VehicleIdRouteImport } from './routes/vehicle.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -52,6 +53,11 @@ const StockRoute = StockRouteImport.update({
   path: '/stock',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VehicleIdRoute = VehicleIdRouteImport.update({
+  id: '/vehicle/$id',
+  path: '/vehicle/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -61,6 +67,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/book': typeof BookRoute
   '/stock': typeof StockRoute
+  '/vehicle/$id': typeof VehicleIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -70,6 +77,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/book': typeof BookRoute
   '/stock': typeof StockRoute
+  '/vehicle/$id': typeof VehicleIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -80,13 +88,29 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/book': typeof BookRoute
   '/stock': typeof StockRoute
+  '/vehicle/$id': typeof VehicleIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/about' | '/account' | '/admin' | '/auth' | '/book' | '/stock'
+    | '/'
+    | '/about'
+    | '/account'
+    | '/admin'
+    | '/auth'
+    | '/book'
+    | '/stock'
+    | '/vehicle/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/account' | '/admin' | '/auth' | '/book' | '/stock'
+  to:
+    | '/'
+    | '/about'
+    | '/account'
+    | '/admin'
+    | '/auth'
+    | '/book'
+    | '/stock'
+    | '/vehicle/$id'
   id:
     | '__root__'
     | '/'
@@ -96,6 +120,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/book'
     | '/stock'
+    | '/vehicle/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -106,6 +131,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   BookRoute: typeof BookRoute
   StockRoute: typeof StockRoute
+  VehicleIdRoute: typeof VehicleIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -159,6 +185,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StockRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/vehicle/$id': {
+      id: '/vehicle/$id'
+      path: '/vehicle/$id'
+      fullPath: '/vehicle/$id'
+      preLoaderRoute: typeof VehicleIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -170,6 +203,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   BookRoute: BookRoute,
   StockRoute: StockRoute,
+  VehicleIdRoute: VehicleIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

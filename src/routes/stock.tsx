@@ -79,12 +79,14 @@ function Stock() {
     Boolean,
   ).length;
 
+  const navigate = Route.useNavigate();
   const set = (patch: Partial<StockSearch>) => {
-    const next = { ...s, ...patch };
+    const next: StockSearch = { ...s, ...patch };
     (Object.keys(next) as (keyof StockSearch)[]).forEach((k) => {
-      if (next[k] === undefined || next[k] === "" || Number.isNaN(next[k])) delete next[k];
+      const value = next[k];
+      if (value === undefined || value === "" || (typeof value === "number" && Number.isNaN(value))) delete next[k];
     });
-    Route.useNavigate ? void 0 : void 0;
+    navigate({ search: next, replace: true });
   };
 
   return (

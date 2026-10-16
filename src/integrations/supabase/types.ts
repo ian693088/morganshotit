@@ -80,6 +80,150 @@ export type Database = {
         }
         Relationships: []
       }
+      car_bookings: {
+        Row: {
+          created_at: string
+          deposit: number
+          email: string | null
+          full_name: string
+          id: string
+          mpesa_code: string | null
+          notes: string | null
+          phone: string
+          status: string
+          updated_at: string
+          user_id: string
+          vehicle_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          deposit?: number
+          email?: string | null
+          full_name: string
+          id?: string
+          mpesa_code?: string | null
+          notes?: string | null
+          phone: string
+          status?: string
+          updated_at?: string
+          user_id: string
+          vehicle_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          deposit?: number
+          email?: string | null
+          full_name?: string
+          id?: string
+          mpesa_code?: string | null
+          notes?: string | null
+          phone?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+          vehicle_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "car_bookings_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "car_bookings_vehicle_id_fkey"
+            columns: ["vehicle_id"]
+            isOneToOne: false
+            referencedRelation: "vehicles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      credit_applications: {
+        Row: {
+          created_at: string
+          deposit_available: number | null
+          desired_car: string | null
+          email: string | null
+          employment: string | null
+          full_name: string
+          id: string
+          loan_term_months: number
+          message: string | null
+          monthly_income: number | null
+          phone: string
+          status: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          deposit_available?: number | null
+          desired_car?: string | null
+          email?: string | null
+          employment?: string | null
+          full_name: string
+          id?: string
+          loan_term_months?: number
+          message?: string | null
+          monthly_income?: number | null
+          phone: string
+          status?: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          deposit_available?: number | null
+          desired_car?: string | null
+          email?: string | null
+          employment?: string | null
+          full_name?: string
+          id?: string
+          loan_term_months?: number
+          message?: string | null
+          monthly_income?: number | null
+          phone?: string
+          status?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      inquiries: {
+        Row: {
+          created_at: string
+          email: string | null
+          id: string
+          message: string
+          name: string
+          phone: string
+          status: string
+          topic: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          message: string
+          name: string
+          phone: string
+          status?: string
+          topic?: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          message?: string
+          name?: string
+          phone?: string
+          status?: string
+          topic?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       media: {
         Row: {
           category: string
@@ -170,6 +314,69 @@ export type Database = {
           id?: string
           role?: Database["public"]["Enums"]["app_role"]
           user_id?: string
+        }
+        Relationships: []
+      }
+      vehicles: {
+        Row: {
+          body_type: string
+          created_at: string
+          deposit: number
+          description: string
+          featured: boolean
+          fuel: string
+          id: string
+          images: string[]
+          make: string
+          mileage_km: number
+          model: string
+          price: number
+          sale_type: string
+          status: string
+          title: string
+          transmission: string
+          updated_at: string
+          year: number
+        }
+        Insert: {
+          body_type?: string
+          created_at?: string
+          deposit?: number
+          description?: string
+          featured?: boolean
+          fuel?: string
+          id?: string
+          images?: string[]
+          make?: string
+          mileage_km?: number
+          model?: string
+          price: number
+          sale_type?: string
+          status?: string
+          title: string
+          transmission?: string
+          updated_at?: string
+          year?: number
+        }
+        Update: {
+          body_type?: string
+          created_at?: string
+          deposit?: number
+          description?: string
+          featured?: boolean
+          fuel?: string
+          id?: string
+          images?: string[]
+          make?: string
+          mileage_km?: number
+          model?: string
+          price?: number
+          sale_type?: string
+          status?: string
+          title?: string
+          transmission?: string
+          updated_at?: string
+          year?: number
         }
         Relationships: []
       }

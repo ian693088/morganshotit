@@ -15,8 +15,8 @@ import { Route as AccountRouteImport } from './routes/account'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as BookRouteImport } from './routes/book'
-import { Route as PortfolioRouteImport } from './routes/portfolio'
-import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as StockRouteImport } from './routes/stock'
+import { Route as VehicleIdRouteImport } from './routes/vehicle.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -48,14 +48,14 @@ const BookRoute = BookRouteImport.update({
   path: '/book',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PortfolioRoute = PortfolioRouteImport.update({
-  id: '/portfolio',
-  path: '/portfolio',
+const StockRoute = StockRouteImport.update({
+  id: '/stock',
+  path: '/stock',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PricingRoute = PricingRouteImport.update({
-  id: '/pricing',
-  path: '/pricing',
+const VehicleIdRoute = VehicleIdRouteImport.update({
+  id: '/vehicle/$id',
+  path: '/vehicle/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -66,8 +66,8 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/book': typeof BookRoute
-  '/portfolio': typeof PortfolioRoute
-  '/pricing': typeof PricingRoute
+  '/stock': typeof StockRoute
+  '/vehicle/$id': typeof VehicleIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -76,8 +76,8 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/book': typeof BookRoute
-  '/portfolio': typeof PortfolioRoute
-  '/pricing': typeof PricingRoute
+  '/stock': typeof StockRoute
+  '/vehicle/$id': typeof VehicleIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -87,8 +87,8 @@ export interface FileRoutesById {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/book': typeof BookRoute
-  '/portfolio': typeof PortfolioRoute
-  '/pricing': typeof PricingRoute
+  '/stock': typeof StockRoute
+  '/vehicle/$id': typeof VehicleIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -99,8 +99,8 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/book'
-    | '/portfolio'
-    | '/pricing'
+    | '/stock'
+    | '/vehicle/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -109,8 +109,8 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/book'
-    | '/portfolio'
-    | '/pricing'
+    | '/stock'
+    | '/vehicle/$id'
   id:
     | '__root__'
     | '/'
@@ -119,8 +119,8 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/book'
-    | '/portfolio'
-    | '/pricing'
+    | '/stock'
+    | '/vehicle/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -130,8 +130,8 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRoute
   AuthRoute: typeof AuthRoute
   BookRoute: typeof BookRoute
-  PortfolioRoute: typeof PortfolioRoute
-  PricingRoute: typeof PricingRoute
+  StockRoute: typeof StockRoute
+  VehicleIdRoute: typeof VehicleIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -178,18 +178,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BookRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/portfolio': {
-      id: '/portfolio'
-      path: '/portfolio'
-      fullPath: '/portfolio'
-      preLoaderRoute: typeof PortfolioRouteImport
+    '/stock': {
+      id: '/stock'
+      path: '/stock'
+      fullPath: '/stock'
+      preLoaderRoute: typeof StockRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/pricing': {
-      id: '/pricing'
-      path: '/pricing'
-      fullPath: '/pricing'
-      preLoaderRoute: typeof PricingRouteImport
+    '/vehicle/$id': {
+      id: '/vehicle/$id'
+      path: '/vehicle/$id'
+      fullPath: '/vehicle/$id'
+      preLoaderRoute: typeof VehicleIdRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -202,8 +202,8 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRoute,
   AuthRoute: AuthRoute,
   BookRoute: BookRoute,
-  PortfolioRoute: PortfolioRoute,
-  PricingRoute: PricingRoute,
+  StockRoute: StockRoute,
+  VehicleIdRoute: VehicleIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

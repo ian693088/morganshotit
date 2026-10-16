@@ -15,6 +15,13 @@
       "when": 1792067849563,
       "tag": "0001_migration",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1792173246775,
+      "tag": "0002_add_car_stock_bookings_and_enquiries",
+      "breakpoints": true
     }
   ]
 }

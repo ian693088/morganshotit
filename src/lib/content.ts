@@ -1,65 +1,53 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import mainpic from "@/assets/gallery/mainpic1.jpg";
+import pic2 from "@/assets/gallery/pic2.jpg";
+import pic3 from "@/assets/gallery/pic3.jpg";
+import pic4 from "@/assets/gallery/pic4.jpg";
+import pic6 from "@/assets/gallery/pic6.jpg";
+import pic7 from "@/assets/gallery/pic7.jpg";
+import pic8 from "@/assets/gallery/pic8.jpg";
+import pic9 from "@/assets/gallery/pic9.jpg";
+import pic10 from "@/assets/gallery/pic10.jpg";
+import pic18 from "@/assets/gallery/pic18.jpg";
 
-export const BRAND = {
-  name: "Calzcars Autohub",
-  tag: "Cash. Credit. Imports.",
-  phoneDisplay: "0742 064 560",
-  phoneRaw: "0742064560",
-  whatsapp: "254742064560",
-  email: "csimiyu465@gmail.com",
-  location: "Along Kiambu Road, Nairobi",
-  hours: "Mon–Sat 8:30am – 6:00pm · Sunday by appointment",
-} as const;
+export const CATEGORIES = ["Weddings", "Birthdays", "Graduations", "Anniversaries", "Portraits", "Others"] as const;
 
-export const SALE_TYPES = ["Cash", "Credit", "Import"] as const;
-export const BODY_TYPES = ["SUV", "Saloon", "Hatchback", "Crossover", "Pickup", "Van"] as const;
-export const FUELS = ["Petrol", "Diesel", "Hybrid", "Electric"] as const;
-export const TRANSMISSIONS = ["Automatic", "Manual", "CVT"] as const;
-export const STATUSES = ["available", "reserved", "sold"] as const;
+export const PACKAGES = [
+  { id: "basic", name: "Basic", price: 3500, perks: ["1 hour session", "10 edited photos", "All raw photos included", "1 location", "Online gallery"] },
+  { id: "pro", name: "Pro", price: 5000, perks: ["2 hour session", "15 edited photos", "All raw photos included", "2 locations", "Outfit change", "Priority delivery"], popular: true },
+  { id: "cinematic", name: "Cinematic", price: 10000, perks: ["Half-day coverage", "25 edited photos", "All raw photos included", "Cinematic highlight film", "Drone shots", "Same-week delivery"] },
+] as const;
 
-export type Vehicle = {
+export const PAYBILL = { number: "714888", account: "376949" };
+export const WHATSAPP = "254700000000";
+
+export type MediaItem = {
   id: string;
-  title: string;
-  make: string;
-  model: string;
-  year: number;
-  price: number;
-  deposit: number;
-  mileage_km: number;
-  fuel: string;
-  transmission: string;
-  body_type: string;
-  sale_type: string;
-  status: string;
-  description: string;
-  images: string[];
+  kind: string;
+  url: string;
+  title: string | null;
+  category: string;
   featured: boolean;
-  created_at: string;
+  storage_path?: string | null;
 };
 
-export const vehiclesQuery = {
-  queryKey: ["vehicles"],
-  queryFn: async (): Promise<Vehicle[]> => {
-    const { data, error } = await supabase
-      .from("vehicles")
-      .select("*")
-      .order("featured", { ascending: false })
-      .order("created_at", { ascending: false });
+export const STARTER: MediaItem[] = [
+  { src: pic2, c: "Weddings" }, { src: pic3, c: "Portraits" }, { src: pic4, c: "Birthdays" },
+  { src: pic6, c: "Graduations" }, { src: pic7, c: "Anniversaries" }, { src: pic8, c: "Portraits" },
+  { src: pic9, c: "Weddings" }, { src: pic10, c: "Others" }, { src: pic18, c: "Birthdays" },
+].map((p, i) => ({ id: `starter-${i}`, kind: "image", url: p.src, title: null, category: p.c, featured: i < 6 }));
+
+export const DEFAULT_HERO = mainpic;
+
+export const mediaQuery = {
+  queryKey: ["media"],
+  queryFn: async (): Promise<MediaItem[]> => {
+    const { data, error } = await supabase.from("media").select("*").order("created_at", { ascending: false });
     if (error) throw error;
-    return (data ?? []) as Vehicle[];
+    return data ?? [];
   },
 };
-
-export function useVehicles() {
-  const q = useQuery(vehiclesQuery);
-  return { ...q, vehicles: q.data ?? [] };
-}
-
-export function useVehicle(id: string | undefined) {
-  const { vehicles, ...rest } = useVehicles();
-  return { ...rest, vehicle: vehicles.find((v) => v.id === id) ?? null };
-}
 
 export const settingsQuery = {
   queryKey: ["settings"],
@@ -69,57 +57,31 @@ export const settingsQuery = {
   },
 };
 
+export function useMedia() {
+  const q = useQuery(mediaQuery);
+  const items = q.data && q.data.length > 0 ? q.data : STARTER;
+  return { ...q, items, usingStarter: !q.data || q.data.length === 0 };
+}
+
 export function useSettings() {
   const q = useQuery(settingsQuery);
   const s = q.data ?? {};
   return {
-    hero: s["hero_image"] || "/cars/hero.jpg",
-    tagline: s["tagline"] || "Find the car you can actually afford.",
-    subline:
-      s["subline"] ||
-      "Cash deals, credit plans you can budget for, and clean imports ordered for you — all from one yard on Kiambu Road.",
-    whatsapp: s["whatsapp"] || BRAND.whatsapp,
-    phone: s["phone"] || BRAND.phoneRaw,
-    email: s["email"] || BRAND.email,
-    location: s["location"] || BRAND.location,
-    paybill: s["paybill"] || "400200",
-    mpesaAccount: s["mpesa_account"] || BRAND.phoneRaw,
+    hero: s["hero_image"] || DEFAULT_HERO,
+    heroVideo: s["hero_video"] || "",
+    tagline: s["tagline"] || "Capture Your Story",
+    subline: s["subline"] || "Cinematic photography & film for the moments you'll want to relive forever.",
+    whatsapp: s["whatsapp"] || WHATSAPP,
   };
 }
-
-export const ksh = (n: number) => `KSh ${Math.round(n || 0).toLocaleString("en-KE")}`;
-
-export const shortDate = (iso: string) =>
-  new Date(iso).toLocaleDateString("en-KE", { day: "numeric", month: "short", year: "numeric" });
-
-export function monthlyPayment(price: number, deposit: number, months: number, ratePct = 13) {
-  const principal = Math.max((price || 0) - (deposit || 0), 0);
-  const months_ = Math.max(months || 0, 1);
-  const r = ratePct / 100 / 12;
-  if (principal <= 0) return 0;
-  if (r <= 0) return principal / months_;
-  return (principal * (r * Math.pow(1 + r, months_))) / (Math.pow(1 + r, months_) - 1);
-}
-
-export const waLink = (number: string, text: string) =>
-  `https://wa.me/${number.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(text)}`;
 
 export async function uploadToStorage(file: File | Blob, name: string) {
   const path = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}-${name.replace(/[^a-zA-Z0-9.]/g, "_")}`;
   const { error } = await supabase.storage.from("media").upload(path, file, file.type ? { contentType: file.type } : {});
   if (error) throw error;
-  const { data, error: e2 } = await supabase.storage
-    .from("media")
-    .createSignedUrl(path, 60 * 60 * 24 * 365 * 20);
+  const { data, error: e2 } = await supabase.storage.from("media").createSignedUrl(path, 60 * 60 * 24 * 365 * 20);
   if (e2 || !data) throw e2 ?? new Error("Could not create link");
   return { path, url: data.signedUrl };
 }
 
-export const SPEC_ROWS: { key: keyof Vehicle; label: string; format?: (v: Vehicle) => string }[] = [
-  { key: "year", label: "Year" },
-  { key: "mileage_km", label: "Mileage", format: (v) => `${v.mileage_km.toLocaleString("en-KE")} km` },
-  { key: "fuel", label: "Fuel" },
-  { key: "transmission", label: "Transmission" },
-  { key: "body_type", label: "Body" },
-  { key: "sale_type", label: "Sale type" },
-];
+export const ksh = (n: number) => `KSh ${n.toLocaleString("en-KE")}`;

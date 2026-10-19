@@ -14,9 +14,9 @@ import pic18 from "@/assets/gallery/pic18.jpg";
 export const CATEGORIES = ["Weddings", "Birthdays", "Graduations", "Anniversaries", "Portraits", "Others"] as const;
 
 export const PACKAGES = [
-  { id: "basic", name: "Basic", price: 3500, perks: ["1 hour session", "15 edited photos", "1 location", "Online gallery"] },
-  { id: "pro", name: "Pro", price: 5000, perks: ["2 hour session", "40 edited photos", "2 locations", "Outfit change", "Priority delivery"], popular: true },
-  { id: "cinematic", name: "Cinematic", price: 10000, perks: ["Half-day coverage", "80+ edited photos", "Cinematic highlight film", "Drone shots", "Same-week delivery"] },
+  { id: "basic", name: "Basic", price: 3500, perks: ["1 hour session", "10 edited photos", "All raw photos included", "1 location", "Online gallery"] },
+  { id: "pro", name: "Pro", price: 5000, perks: ["2 hour session", "15 edited photos", "All raw photos included", "2 locations", "Outfit change", "Priority delivery"], popular: true },
+  { id: "cinematic", name: "Cinematic", price: 10000, perks: ["Half-day coverage", "25 edited photos", "All raw photos included", "Cinematic highlight film", "Drone shots", "Same-week delivery"] },
 ] as const;
 
 export const PAYBILL = { number: "714888", account: "376949" };

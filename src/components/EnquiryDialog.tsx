@@ -24,12 +24,12 @@ export function EnquiryDialog() {
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     const r = schema.safeParse(f);
-    if (!r.success) return toast.error(r.error.issues[0].message);
+    if (!r.success) { toast.error(r.error.issues[0]?.message ?? "Please check the form"); return; }
     setBusy(true);
     const { data: u } = await supabase.auth.getUser();
     const { error } = await supabase.from("inquiries").insert({ ...r.data, topic: "Enquiry", user_id: u.user?.id ?? null });
     setBusy(false);
-    if (error) return toast.error("Couldn't send — please try again.");
+    if (error) { toast.error("Couldn't send — please try again."); return; }
     toast.success("Enquiry sent! We'll reply to your email soon.");
     setF({ name: "", email: "", phone: "", message: "" });
     setOpen(false);

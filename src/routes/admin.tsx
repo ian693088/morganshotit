@@ -48,11 +48,13 @@ function Admin() {
           {isAdmin && <TabsTrigger value="media">Photos & videos</TabsTrigger>}
           {isAdmin && <TabsTrigger value="home">Homepage</TabsTrigger>}
           {isAdmin && <TabsTrigger value="bookings">Bookings</TabsTrigger>}
+          {isAdmin && <TabsTrigger value="enquiries">Enquiries</TabsTrigger>}
           {isApprover && <TabsTrigger value="team">Team & approvals</TabsTrigger>}
         </TabsList>
         {isAdmin && <TabsContent value="media"><MediaManager /></TabsContent>}
         {isAdmin && <TabsContent value="home"><HomeSettings /></TabsContent>}
         {isAdmin && <TabsContent value="bookings"><Bookings /></TabsContent>}
+        {isAdmin && <TabsContent value="enquiries"><Enquiries /></TabsContent>}
         {isApprover && <TabsContent value="team"><Team /></TabsContent>}
       </Tabs>
     </div>
@@ -235,6 +237,43 @@ function Bookings() {
         </div>
       ))}
       {data.length === 0 && <p className="text-muted-foreground">No bookings yet.</p>}
+    </div>
+  );
+}
+
+function Enquiries() {
+  const qc = useQueryClient();
+  const { data = [] } = useQuery({
+    queryKey: ["admin", "inquiries"],
+    queryFn: async () => (await supabase.from("inquiries").select("*").order("created_at", { ascending: false })).data ?? [],
+  });
+  const setStatus = async (id: string, status: string) => {
+    await supabase.from("inquiries").update({ status }).eq("id", id);
+    qc.invalidateQueries({ queryKey: ["admin", "inquiries"] });
+  };
+  return (
+    <div className="mt-6 space-y-3">
+      {data.map((q) => (
+        <div key={q.id} className="rounded-2xl border border-border p-5">
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <p className="font-display text-2xl">{q.name}</p>
+              <p className="text-sm text-muted-foreground">{q.email ?? "—"} · {q.phone} · {new Date(q.created_at).toLocaleString()}</p>
+            </div>
+            <StatusBadge s={q.status} />
+          </div>
+          <p className="mt-3 whitespace-pre-wrap">{q.message}</p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {q.email && (
+              <Button size="sm" asChild onClick={() => setStatus(q.id, "replied")}>
+                <a href={`mailto:${q.email}?subject=${encodeURIComponent("Re: Your enquiry — MorganShotIt Studio")}&body=${encodeURIComponent(`Hi ${q.name},\n\n\n\n— MorganShotIt Studio\n\nYour message:\n> ${q.message}`)}`}>Reply via email</a>
+              </Button>
+            )}
+            {q.status !== "replied" && <Button size="sm" variant="ghost" onClick={() => setStatus(q.id, "replied")}><Check /> Mark replied</Button>}
+          </div>
+        </div>
+      ))}
+      {data.length === 0 && <p className="text-muted-foreground">No enquiries yet.</p>}
     </div>
   );
 }

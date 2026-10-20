@@ -4,6 +4,7 @@ import { ArrowRight, Star, Heart, Cake, GraduationCap, Sparkles, Camera, Film } 
 import { Button } from "@/components/ui/button";
 import { useMedia, useSettings, PACKAGES, ksh, type MediaItem } from "@/lib/content";
 import { MediaTile, Lightbox } from "@/components/MediaTile";
+import { EnquiryDialog } from "@/components/EnquiryDialog";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -49,6 +50,9 @@ function Index() {
           <div className="animate-rise mt-10 flex flex-wrap justify-center gap-3" style={{ animationDelay: "360ms" }}>
             <Button asChild variant="hero" size="xl"><Link to="/book">Book a session <ArrowRight /></Link></Button>
             <Button asChild variant="glass" size="xl"><Link to="/portfolio">View portfolio</Link></Button>
+          </div>
+          <div className="animate-rise mt-3 flex justify-center" style={{ animationDelay: "420ms" }}>
+            <EnquiryDialog />
           </div>
         </div>
         <div className="absolute bottom-8 left-1/2 z-10 h-12 w-px -translate-x-1/2 bg-gradient-to-b from-primary to-transparent" />

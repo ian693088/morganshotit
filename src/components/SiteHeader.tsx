@@ -31,7 +31,7 @@ export function SiteHeader() {
     <header className="fixed inset-x-0 top-0 z-50 bg-nav-violet md:glass border-b border-border">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
         <Link to="/" className="flex items-center">
-          <img src={logo} alt="Morgan Shot It" width={624} height={576} className="h-11 w-auto" />
+          <img src={logo} alt="Morgan Shot It" width={606} height={574} className="h-14 w-auto md:h-16" />
         </Link>
 
         <nav className="hidden items-center gap-8 text-sm md:flex">

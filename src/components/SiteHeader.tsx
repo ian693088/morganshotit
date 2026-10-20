@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { Menu, X, Camera, LayoutDashboard, LogOut, User } from "lucide-react";
+import { Menu, X, LayoutDashboard, LogOut, User } from "lucide-react";
+import logo from "@/assets/logo.png";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/lib/auth";
 import { supabase } from "@/integrations/supabase/client";
@@ -27,13 +28,10 @@ export function SiteHeader() {
   };
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 glass border-b border-border">
+    <header className="fixed inset-x-0 top-0 z-50 bg-nav-violet md:glass border-b border-border">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
-        <Link to="/" className="flex items-center gap-2">
-          <span className="grid h-9 w-9 place-items-center rounded-full bg-gold text-primary-foreground">
-            <Camera className="h-4 w-4" />
-          </span>
-          <span className="font-display text-2xl font-semibold">MorganShotIt</span>
+        <Link to="/" className="flex items-center">
+          <img src={logo} alt="Morgan Shot It" width={606} height={574} className="h-14 w-auto md:h-16" />
         </Link>
 
         <nav className="hidden items-center gap-8 text-sm md:flex">
@@ -64,9 +62,9 @@ export function SiteHeader() {
       </div>
 
       {open && (
-        <div className="fixed inset-0 z-50 bg-background md:hidden animate-in fade-in">
+        <div className="fixed inset-0 z-50 bg-nav-violet md:hidden animate-in fade-in">
           <div className="flex items-center justify-between px-5 py-4">
-            <span className="font-display text-2xl">MorganShotIt</span>
+            <img src={logo} alt="Morgan Shot It" width={624} height={576} className="h-9 w-auto" />
             <button onClick={() => setOpen(false)} aria-label="Close menu"><X /></button>
           </div>
           <nav className="flex flex-col gap-1 px-5 pt-6">

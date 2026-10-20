@@ -30,8 +30,12 @@ export function SiteHeader() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 bg-nav-violet md:glass border-b border-border">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
-        <Link to="/" className="flex items-center">
-          <img src={logo} alt="Morgan Shot It" width={606} height={574} className="h-14 w-auto md:h-16" />
+        <Link to="/" className="flex items-center gap-3">
+          <img src={logo} alt="Morgan Shot It" width={606} height={574} className="h-12 w-auto md:h-16" />
+          <span className="font-display text-lg font-semibold leading-none tracking-[0.18em] md:text-2xl">
+            <span className="text-foreground">MORGAN</span>
+            <span className="text-primary">SHOTIT</span>
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-8 text-sm md:flex">
@@ -64,7 +68,13 @@ export function SiteHeader() {
       {open && (
         <div className="fixed inset-0 z-50 bg-nav-violet md:hidden animate-in fade-in">
           <div className="flex items-center justify-between px-5 py-4">
-            <img src={logo} alt="Morgan Shot It" width={624} height={576} className="h-9 w-auto" />
+            <span className="flex items-center gap-2.5">
+              <img src={logo} alt="Morgan Shot It" width={624} height={576} className="h-9 w-auto" />
+              <span className="font-display text-base font-semibold leading-none tracking-[0.16em]">
+                <span className="text-foreground">MORGAN</span>
+                <span className="text-primary">SHOTIT</span>
+              </span>
+            </span>
             <button onClick={() => setOpen(false)} aria-label="Close menu"><X /></button>
           </div>
           <nav className="flex flex-col gap-1 px-5 pt-6">

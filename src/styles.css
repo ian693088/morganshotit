@@ -21,6 +21,7 @@
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-primary-glow: var(--primary-glow);
+  --color-nav-violet: var(--nav-violet);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
@@ -86,6 +87,7 @@
   --sidebar-border: oklch(0.95 0.015 80 / 12%);
   --sidebar-ring: oklch(0.78 0.11 75);
 
+  --nav-violet: oklch(0.23 0.06 290);
   --gradient-gold: linear-gradient(120deg, var(--primary) 0%, var(--primary-glow) 50%, var(--primary) 100%);
   --gradient-fade: linear-gradient(180deg, oklch(0.13 0.008 60 / 0.2) 0%, oklch(0.13 0.008 60 / 0.6) 60%, var(--background) 100%);
   --shadow-glow: 0 20px 60px -20px color-mix(in oklab, var(--primary) 45%, transparent);

@@ -121,6 +121,9 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  useEffect(() => {
+    import("@/lib/register-sw").then((m) => m.registerServiceWorker());
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>

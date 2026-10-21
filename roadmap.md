@@ -1,5 +1,7 @@
 # Roadmap
 
+- [x] Add studio location: Fedha along Outer Ring road
+- [x] Add manifest-only phone home-screen support with existing MorganShotIt logo
 - [x] Mobile navigation: solid dark violet background on mobile view only (desktop keeps glass look)
 - [x] Replace camera-icon brand with uploaded "MORGAN shot it" logo (transparent PNG) + favicon
 - [x] Show "MORGANSHOTIT" wordmark beside the logo in the header (desktop + mobile menu)

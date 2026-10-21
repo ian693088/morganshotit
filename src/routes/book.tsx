@@ -16,6 +16,8 @@ export const Route = createFileRoute("/book")({
   validateSearch: (s: Record<string, unknown>): Search => ({ pkg: typeof s["pkg"] === "string" ? s["pkg"] : undefined }),
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Book a Session — MorganShotIt Studio" },
       { name: "description", content: "Pick a package and date, pay via M-Pesa Paybill 714888, and confirm your booking." },
       { property: "og:title", content: "Book a Session — MorganShotIt Studio" },

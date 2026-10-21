@@ -12,6 +12,8 @@ import { ksh } from "@/lib/content";
 export const Route = createFileRoute("/account")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "My Account — MorganShotIt Studio" },
       { name: "description", content: "View your bookings and payment status." },
       { property: "og:title", content: "My Account — MorganShotIt Studio" },

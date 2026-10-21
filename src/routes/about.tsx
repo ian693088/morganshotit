@@ -6,8 +6,10 @@ import { useMedia, useSettings } from "@/lib/content";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "About — MorganShotIt Studio" },
-      { name: "description", content: "Meet Morgan, the photographer and filmmaker behind MorganShotIt Studio in Kenya." },
+      { name: "description", content: "Meet Morgan, the photographer and filmmaker behind MorganShotIt Studio in Fedha along Outer Ring road, Kenya." },
       { property: "og:title", content: "About — MorganShotIt Studio" },
       { property: "og:description", content: "The story and studio behind MorganShotIt." },
     ],
@@ -31,7 +33,7 @@ function About() {
             documentary honesty with a cinematic eye so your photos feel like scenes from your own film.
           </p>
           <div className="mt-10 space-y-4 text-muted-foreground">
-            <p className="flex gap-3"><MapPin className="text-primary" /> Based in Kenya · available to travel</p>
+            <p className="flex gap-3"><MapPin className="shrink-0 text-primary" /> Fedha along Outer Ring road · available to travel</p>
             <p className="flex gap-3"><Clock className="text-primary" /> Mon – Sun, by appointment</p>
             <p className="flex gap-3"><MessageCircle className="text-primary" /> Chat on WhatsApp anytime</p>
           </div>

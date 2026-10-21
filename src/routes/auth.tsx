@@ -12,6 +12,8 @@ import { DEFAULT_HERO } from "@/lib/content";
 export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Sign in — MorganShotIt Studio" },
       { name: "description", content: "Sign in or create your MorganShotIt account to book and track sessions." },
       { property: "og:title", content: "Sign in — MorganShotIt Studio" },

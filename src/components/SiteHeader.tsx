@@ -106,6 +106,7 @@ export function SiteFooter() {
         <div>
           <p className="font-display text-3xl">MorganShotIt</p>
           <p className="mt-2 max-w-xs text-sm text-muted-foreground">Photography & cinematic film studio. Weddings, birthdays, graduations and every story worth keeping.</p>
+          <p className="mt-3 text-sm text-muted-foreground">Fedha along Outer Ring road</p>
         </div>
         <div className="text-sm text-muted-foreground">
           <p className="mb-2 text-foreground">Explore</p>

@@ -9,4 +9,4 @@
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
 
-- Home-screen app support uses a manifest and logo icons only, without an app-shell service worker, because offline support has not been requested.
+- Offline support uses vite-plugin-pwa generateSW (output to dist/client/sw.js, NetworkFirst pages, cached media) registered only via src/lib/register-sw.ts, which refuses dev/preview/iframes, so previews never get stale caches.

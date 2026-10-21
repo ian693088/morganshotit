@@ -9,6 +9,8 @@ import { EnquiryDialog } from "@/components/EnquiryDialog";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "MorganShotIt Studio — Capture Your Story" },
       { name: "description", content: "Cinematic wedding, birthday, graduation and portrait photography. Book your session and pay via M-Pesa." },
       { property: "og:title", content: "MorganShotIt Studio — Capture Your Story" },

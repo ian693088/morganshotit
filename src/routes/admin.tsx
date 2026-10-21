@@ -16,6 +16,8 @@ import { StatusBadge } from "@/components/StatusBadge";
 export const Route = createFileRoute("/admin")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Dashboard — MorganShotIt Studio" },
       { name: "description", content: "Manage MorganShotIt photos, videos, bookings and team." },
       { name: "robots", content: "noindex" },

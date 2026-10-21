@@ -6,6 +6,8 @@ import { useMedia, useSettings } from "@/lib/content";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "About — MorganShotIt Studio" },
       { name: "description", content: "Meet Morgan, the photographer and filmmaker behind MorganShotIt Studio in Fedha along Outer Ring road, Kenya." },
       { property: "og:title", content: "About — MorganShotIt Studio" },

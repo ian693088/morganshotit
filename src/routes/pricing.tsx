@@ -6,6 +6,8 @@ import { PACKAGES, PAYBILL, ksh } from "@/lib/content";
 export const Route = createFileRoute("/pricing")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Pricing — MorganShotIt Studio" },
       { name: "description", content: "Basic KSh 3,500, Pro KSh 5,000, Cinematic KSh 10,000. Pay securely via M-Pesa Paybill." },
       { property: "og:title", content: "Pricing — MorganShotIt Studio" },
